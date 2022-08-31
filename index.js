@@ -2,10 +2,13 @@ const core = require("@actions/core");
 const github = require("@actions/github");
 const exec = require("@actions/exec");
 
+const runTests = async () => {
+  await exec.exec("yarn test");
+};
+
 try {
   // `who-to-greet` input defined in action metadata file
-  await exec.exec("yarn test");
-
+  runTests();
   const nameToGreet = core.getInput("who-to-greet");
   console.log(`Hello ${nameToGreet}!`);
   const time = new Date().toTimeString();
